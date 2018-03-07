@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>OpenLaw Tools</title>
+    </head>
+    <body>
+        <div id="tools">
+            <div id="fetch-file">
+                <form action="/fetch" method="post" enctype="multipart/form-data">
+                    <label for="form-url-field">URL</label>
+                    <input type="url" name="url" id="form-url-field">
+                    <button type="submit">Fetch</button>
+                </form>
+            </div>
+            <div id="upload-file">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <label for="form-file-field">File</label>
+                    <input type="file" name="file" id="form-file-field">
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+            <div id="input-text">
+                <form action="/text" method="post" enctype="multipart/form-data">
+                    <label for="form-text-field">Text</label>
+                    <textarea name="text" id="form-text-field"></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+Twisted = "*"
+treq = "*"
+txHTTP = "*"
+klein = "*"
+python-magic = "*"
+Werkzeug = "*"
+ujson = "*"
+pdftotext = "*"
+
+
+[dev-packages]
+
