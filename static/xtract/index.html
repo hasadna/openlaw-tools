@@ -1,48 +1,140 @@
-<html>
+<!doctype html>
+<html lang="he" dir="rtl">
     <head>
-        <title>OpenLaw Tools</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.0.0/css/bootstrap.min.css"
+              integrity="sha384-P4uhUIGk/q1gaD/NdgkBIl3a6QywJjlsFJFk7SPRdruoGddvRVSwv5qFnvZ73cpz"
               crossorigin="anonymous">
+
+        <title>OpenLaw Tools</title>
     </head>
     <body>
         <div class="container">
-            <div id="tools">
-                <div id="fetch-file">
-                    <form action="/xtract/fetch" method="post" enctype="multipart/form-data">
-                        <label for="form-url-field">URL</label>
-                        <input type="url" name="url" id="form-url-field">
-                        <label><input type="checkbox" name="syntax" value="1"> Syntax</label>
-                        <button type="submit">Fetch</button>
-                    </form>
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h1 class="display-4">xTract <small class="text-muted">ספר החוקים הפתוח</small></h1>
                 </div>
-                <div id="upload-file">
-                    <form action="/xtract/upload" method="post" enctype="multipart/form-data">
-                        <label for="form-file-field">File</label>
-                        <input type="file" name="file" id="form-file-field">
-                        <label><input type="checkbox" name="syntax" value="1"> Syntax</label>
-                        <button type="submit">Upload</button>
-                    </form>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#fetch-file">משיכת קובץ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#upload-file">העלאת קובץ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#input-text">הזנת טקסט</a>
+                        </li>
+                    </ul>
                 </div>
-                <div id="input-text">
-                    <form action="/xtract/text" method="post" enctype="multipart/form-data">
-                        <label for="form-text-field">Text</label>
-                        <textarea name="text" id="form-text-field"></textarea>
-                        <label><input type="checkbox" name="syntax" value="1" checked> Syntax</label>
-                        <button type="submit">Send</button>
-                    </form>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="tab-content card" id="tools">
+                        <div class="tab-pane fade card-body show active" id="fetch-file">
+                            <form action="/xtract/fetch" method="post" enctype="application/x-www-form-urlencoded">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label for="form-url-field" class="input-group-text">URL</label>
+                                    </div>
+                                    <input type="url" class="form-control" name="url" id="form-url-field" placeholder="נתיב קובץ מרוחק" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label><input type="checkbox" name="syntax" value="1"> Syntax</label>
+                                </div>
+                                <div class="mb-3 text-right">
+                                    <button class="btn btn-primary" type="submit">משוך</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade card-body" id="upload-file">
+                            <form action="/xtract/upload" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="form-file-field" class="sr-only">Choose file</label>
+                                    <input class="form-control-file" type="file" name="file" id="form-file-field" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label><input type="checkbox" name="syntax" value="1"> Syntax</label>
+                                </div>
+                                <div class="mb-3 text-right">
+                                    <button class="btn btn-primary" type="submit">העלה</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade card-body" id="input-text">
+                            <form action="/xtract/text" method="post" enctype="application/x-www-form-urlencoded">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label for="form-text-field" class="input-group-text">טקסט</label>
+                                    </div>
+                                    <textarea name="text" id="form-text-field" class="form-control" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label><input type="checkbox" name="syntax" value="1" checked> Syntax</label>
+                                </div>
+                                <div class="mb-3 text-right">
+                                    <button class="btn btn-primary" type="submit">שלח</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title"><label for="xtract-result">תוצאה</label></h4>
+                            <div class="card-text">
+                                <textarea id="xtract-result" class="form-control" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <!-- JavaScript -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
                 crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
                 integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
                 crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        <script src="https://cdn.rtlcss.com/bootstrap/v4.0.0/js/bootstrap.min.js"
+                integrity="sha384-54+cucJ4QbVb99v8dcttx/0JRx4FHMmhOWi4W+xrXpKcsKQodCBwAvu3xxkZAwsH"
                 crossorigin="anonymous"></script>
+        <script>
+            var myString = '';
+            (function($, window, document) {
+                $(function() {
+                    $("form").on("submit", function(e) {
+                        e.preventDefault();
+                        $("#xtract-result").val("").attr("rows", "4");
+                        var $this = $(this);
+
+                        var $formData = false;
+                        if (window.FormData) {
+                            $formData = new window.FormData(this);
+                        }
+
+                        $.ajax({
+                            url: this.action,
+                            data: $formData ? $formData : $this.serialize(),
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            type: 'POST',
+                            success: function (data, textStatus, jqXHR) {
+                                var lines = (data.match(/\n/g) || []).length;
+                                var taRows = Math.min(lines, 20);
+                                $("#xtract-result").val(data).attr("rows", taRows);
+                            }
+                        });
+                    });
+                });
+            }(window.jQuery, window, document));
+        </script>
     </body>
 </html>
