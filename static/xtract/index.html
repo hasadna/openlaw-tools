@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <title>OpenLaw Tools</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div id="tools">
+                <div id="fetch-file">
+                    <form action="/xtract/fetch" method="post" enctype="multipart/form-data">
+                        <label for="form-url-field">URL</label>
+                        <input type="url" name="url" id="form-url-field">
+                        <label><input type="checkbox" name="syntax" value="1"> Syntax</label>
+                        <button type="submit">Fetch</button>
+                    </form>
+                </div>
+                <div id="upload-file">
+                    <form action="/xtract/upload" method="post" enctype="multipart/form-data">
+                        <label for="form-file-field">File</label>
+                        <input type="file" name="file" id="form-file-field">
+                        <label><input type="checkbox" name="syntax" value="1"> Syntax</label>
+                        <button type="submit">Upload</button>
+                    </form>
+                </div>
+                <div id="input-text">
+                    <form action="/xtract/text" method="post" enctype="multipart/form-data">
+                        <label for="form-text-field">Text</label>
+                        <textarea name="text" id="form-text-field"></textarea>
+                        <label><input type="checkbox" name="syntax" value="1"> Syntax</label>
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- JavaScript -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+    </body>
+</html>

@@ -12,7 +12,7 @@ from .file import File
 class IndexHandler(Handler):
     def get(self, request):
         request.setHeader(b'Content-Type', b'text/html; charset=utf-8')
-        return open('static/index.html').read()
+        return open('static/xtract/index.html').read()
 
 
 class TextHandlerMixin(object):

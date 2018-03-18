@@ -3,8 +3,6 @@ import os
 from txhttp import Application
 from werkzeug.exceptions import HTTPException, InternalServerError
 
-from openlaw_tools.handlers import IndexHandler, UploadHandler, FetchHandler, TextHandler
-
 
 class ToolsServer(object):
     app = Application()
@@ -49,11 +47,14 @@ class ToolsServer(object):
 
 
 if __name__ == '__main__':
+    from xtract.handlers import IndexHandler, UploadHandler, FetchHandler, TextHandler
+
     tools = ToolsServer()
 
-    tools.app.set_handler('/', IndexHandler.as_handler(), methods=['GET'])
-    tools.app.set_handler('/upload', UploadHandler.as_handler(), methods=['POST'])
-    tools.app.set_handler('/fetch', FetchHandler.as_handler(), methods=['POST'])
-    tools.app.set_handler('/text', TextHandler.as_handler(), methods=['POST'])
+    tools.app.set_handler('/xtract', IndexHandler.as_handler(), methods=['GET'])
+    with tools.app.subroute('/xtract') as xtract:
+        xtract.set_handler('/upload', UploadHandler.as_handler(), methods=['POST'])
+        xtract.set_handler('/fetch', FetchHandler.as_handler(), methods=['POST'])
+        xtract.set_handler('/text', TextHandler.as_handler(), methods=['POST'])
 
     tools.run()
