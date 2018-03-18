@@ -29,7 +29,7 @@ class TextHandlerMixin(object):
         except Exception as e:
             clean_text = str(e)
 
-        if self.request.args.get(b'syntax') == [b'on']:
+        if self.request.args.get(b'syntax') == [b'1']:
             basic_syntax = os.path.join(self.app.bot_lib, 'basic-syntax.pl')
             try:
                 process = subprocess.Popen(
