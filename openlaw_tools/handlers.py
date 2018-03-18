@@ -1,4 +1,6 @@
 import json
+import os
+import subprocess
 
 import treq
 from txhttp import Handler
@@ -15,8 +17,33 @@ class IndexHandler(Handler):
 
 class TextHandlerMixin(object):
     def handle(self, text):
+        try:
+            clear_pl = os.path.join(self.app.bot_lib, 'clear.pl')
+            process = subprocess.Popen(
+                [clear_pl, '-t=1'],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                encoding='utf-8',
+            )
+            clean_text, err = process.communicate(text)
+        except Exception as e:
+            clean_text = str(e)
+
+        if self.request.args.get(b'syntax') == [b'on']:
+            basic_syntax = os.path.join(self.app.bot_lib, 'basic-syntax.pl')
+            try:
+                process = subprocess.Popen(
+                    [basic_syntax],
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    encoding='utf-8',
+                )
+                clean_text, err = process.communicate(clean_text)
+            except Exception as e:
+                clean_text = str(e)
+
         self.request.setHeader(b'Content-Type', b'text/plain; charset=utf-8')
-        return text
+        return clean_text
 
 
 class UploadHandler(Handler, TextHandlerMixin):
@@ -26,6 +53,8 @@ class UploadHandler(Handler, TextHandlerMixin):
             file = File.from_buffer(buffer=request.args[b'file'][0])
             if file.content_type not in ['application/pdf']:
                 raise BadRequest('You need to upload a file of type pdf')
+
+            file.save_as(os.path.join(self.app.base_dir, 'uploads', 'file'))
 
             return self.handle(str(file))
         else:
@@ -62,6 +91,8 @@ class FetchHandler(Handler, TextHandlerMixin):
         file = File.from_buffer(buffer=content)
         if file.content_type not in ['application/pdf']:
             raise BadRequest('You need to fetch a file of type pdf')
+
+        file.save_as(os.path.join(self.app.base_dir, 'uploads', 'remote-file'))
 
         return self.handle(str(file))
 

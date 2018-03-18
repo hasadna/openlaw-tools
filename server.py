@@ -17,14 +17,16 @@ class ToolsServer(object):
             'uploads/text',
         ]
         for directory in directories:
-            os.makedirs(os.path.join(self.base_dir, directory), 0o644, True)
+            os.makedirs(os.path.join(self.base_dir, directory), 0o755, True)
 
         self.base_dir = os.path.dirname(os.path.abspath(__file__))
         self.app_host = os.environ.get('APP_HOST', 'localhost')
         self.app_port = int(os.environ.get('APP_PORT', 8081))
         self.debug = bool(os.environ.get('DEBUG'))
 
-    @app.handle_errors(Exception)
+        self.bot_lib = os.environ.get('OPENLAW_BOT_LIB')
+
+    # @app.handle_errors(Exception)
     def handle_exceptions(self, request, failure):
         """
         :param twisted.web.server.Request request:

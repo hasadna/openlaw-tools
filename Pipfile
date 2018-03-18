@@ -14,7 +14,7 @@ klein = "*"
 python-magic = "*"
 Werkzeug = "*"
 ujson = "*"
-pdftotext = "*"
+"PyPDF2" = "*"
 
 
 [dev-packages]

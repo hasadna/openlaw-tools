@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "e604aa61b8f329f34eea048b3e80e05600ae6d7831bced8f3807f7c10ded5f24"
+            "sha256": "ec9a3f70b53507f25532b0720ceddc9ed8e98ed272af8d71875f8c161086bee2"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -158,12 +158,6 @@
             ],
             "version": "==17.10.0"
         },
-        "pdftotext": {
-            "hashes": [
-                "sha256:0b82a9fd255a3f2bf5c861cf9e3174d3c4223e1e441bb060c611dcb4e65c6cb8"
-            ],
-            "version": "==2.0.2"
-        },
         "pyasn1": {
             "hashes": [
                 "sha256:f81c96761fca60d64b1c9b79ec2e40cf9495a745cf570613079ef324aeb9672b",
@@ -210,6 +204,12 @@
                 "sha256:2c10cfba46a52c0b0950118981d61e72c1e5b1aac451ca1bc77de1a679456773"
             ],
             "version": "==17.5.0"
+        },
+        "pypdf2": {
+            "hashes": [
+                "sha256:e28f902f2f0a1603ea95ebe21dff311ef09be3d0f0ef29a3e44a932729564385"
+            ],
+            "version": "==1.26.0"
         },
         "python-magic": {
             "hashes": [
