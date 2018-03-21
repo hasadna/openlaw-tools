@@ -21,4 +21,7 @@ ENV PYTHONPATH /app
 
 COPY . /app
 
+VOLUME ["/app/uploads"]
+EXPOSE 8081
+
 CMD ["python", "server.py"]
